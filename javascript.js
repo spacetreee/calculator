@@ -20,12 +20,17 @@ function operate(operator, a, b) {
 
 const buttons = document.querySelectorAll('button');
 const result = document.querySelector('.result');
+let displayValue = 0;
 
+function callback(button) {
+    displayValue += button.target.id;
+    console.log(displayValue);
+    result.textContent = parseInt(displayValue);
+    displayValue = parseInt(displayValue);
+    return displayValue;
+}
+console.log(displayValue);
 buttons.forEach(button => {
-    button.addEventListener('click', callback(button.id));
+    button.addEventListener('click', callback);
 })
 
-function callback(num) {
-    result.textContent = num;
-    console.log(num);
-}
