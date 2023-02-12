@@ -20,20 +20,46 @@ function operate(operator, a, b) {
 
 const buttons = document.querySelectorAll('button');
 const result = document.querySelector('.result');
-const operations = document.querySelectorAll('button operator');
-let displayValue = 0;
-let firstNum = 0;
+const operations = document.querySelectorAll('.operator');
+const value = {
+    firstNum: 0,
+    secondNum: 0,
+};
+const displayVal = {
+    value: '',
+};
+const opSelected = {
+    matched: '',
+};
+
 const opArray = ['add', 'subtract', 'multiply', 'divide'];
 
 function display(button) {
-    displayValue += button.target.id;
-    result.textContent = parseInt(displayValue);
-    displayValue = parseInt(displayValue);
-    firstNum = displayValue;
-    return displayValue;
+    value['firstNum'] += button.target.id;
+    displayVal['value'] = parseInt(value['firstNum']);  
+    value['firstNum'] = parseInt(value['firstNum']);
+
+    result.textContent = parseInt(displayVal.value);
 }
 
 buttons.forEach(button => {
     button.addEventListener('click', display);
 })
 
+function getOp(operation) {
+    opSelected.matched = opArray.find( element => {
+        return element == operation.target.id;
+    });
+    resetDisplay();
+}
+
+operations.forEach(operation => {
+    operation.addEventListener('click', getOp);
+})
+
+function resetDisplay() {
+    if (opSelected.matched) {
+        displayVal.value = 0;
+        result.textContent = displayVal.value;
+    }
+}
