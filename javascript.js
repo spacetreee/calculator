@@ -21,9 +21,11 @@ function operate(operator, a, b) {
 const buttons = document.querySelectorAll('button');
 const result = document.querySelector('.result');
 const operations = document.querySelectorAll('.operator');
+const equality = document.querySelector('#equal');
 const value = {
-    firstNum: 0,
-    secondNum: 0,
+    firstNum: '',
+    secondNum: '',
+    sum: '',
 };
 const displayVal = {
     value: '',
@@ -35,11 +37,19 @@ const opSelected = {
 const opArray = ['add', 'subtract', 'multiply', 'divide'];
 
 function display(button) {
-    value['firstNum'] += button.target.id;
-    displayVal['value'] = parseInt(value['firstNum']);  
-    value['firstNum'] = parseInt(value['firstNum']);
-
-    result.textContent = parseInt(displayVal.value);
+    if (opSelected.matched == '') {
+        value['firstNum'] += button.target.id;
+        displayVal['value'] = parseInt(value['firstNum']);  
+        value['firstNum'] = parseInt(value['firstNum']);
+    
+        result.textContent = parseInt(displayVal.value);
+    } else if (opSelected.matched != '') {
+        value['secondNum'] += button.target.id;
+        displayVal['value'] = parseInt(value['secondNum']);  
+        value['secondNum'] = parseInt(value['secondNum']);
+    
+        result.textContent = parseInt(displayVal.value);
+    }
 }
 
 buttons.forEach(button => {
@@ -50,7 +60,7 @@ function getOp(operation) {
     opSelected.matched = opArray.find( element => {
         return element == operation.target.id;
     });
-    resetDisplay();
+        resetDisplay();
 }
 
 operations.forEach(operation => {
@@ -61,5 +71,13 @@ function resetDisplay() {
     if (opSelected.matched) {
         displayVal.value = 0;
         result.textContent = displayVal.value;
+    }
+}
+
+equality.addEventListener('click', performOp);
+
+function performOp(e) {
+    if (value.firstNum && value.secondNum && opSelected.matched) {
+        
     }
 }
