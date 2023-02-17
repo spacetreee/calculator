@@ -15,7 +15,16 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-    return operator(a,b);
+    switch (operator) {
+        case 'add':
+            return add(a, b);
+        case 'subtract':
+            return subtract(a, b);
+        case 'multiply':
+            return multiply(a, b);
+        case 'divide':
+            return divide(a, b);
+    }
 }
 
 const buttons = document.querySelectorAll('button');
@@ -25,7 +34,7 @@ const equality = document.querySelector('#equal');
 const value = {
     firstNum: '',
     secondNum: '',
-    sum: '',
+    result: '',
 };
 const displayVal = {
     value: '',
@@ -60,7 +69,7 @@ function getOp(operation) {
     opSelected.matched = opArray.find( element => {
         return element == operation.target.id;
     });
-        resetDisplay();
+    resetDisplay();
 }
 
 operations.forEach(operation => {
@@ -76,8 +85,10 @@ function resetDisplay() {
 
 equality.addEventListener('click', performOp);
 
-function performOp(e) {
+function performOp() {
+    console.log(value.firstNum + ' and ' + value.secondNum);
     if (value.firstNum && value.secondNum && opSelected.matched) {
-        
+        value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
+        result.textContent = parseInt(value.result);
     }
 }
