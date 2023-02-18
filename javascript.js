@@ -46,18 +46,20 @@ const opSelected = {
 const opArray = ['add', 'subtract', 'multiply', 'divide'];
 
 function display(button) {
+    //initial input from user before op is selected
     if (opSelected.matched == '') {
         value['firstNum'] += button.target.id;
         displayVal['value'] = parseInt(value['firstNum']);  
         value['firstNum'] = parseInt(value['firstNum']);
     
-        resultDisplay.textContent = parseInt(displayVal.value);
+        resultDisplay.textContent = displayVal.value;
+    //record second number if op is selected
     } else if (opSelected.matched != '') {
         value['secondNum'] += button.target.id;
         displayVal['value'] = parseInt(value['secondNum']);  
         value['secondNum'] = parseInt(value['secondNum']);
     
-        resultDisplay.textContent = parseInt(displayVal.value);
+        resultDisplay.textContent = displayVal.value;
     }
 }
 
@@ -66,27 +68,26 @@ buttons.forEach(button => {
 })
 
 function getOp(operation) {
-    opSelected.matched = opArray.find( element => {
-        return element == operation.target.id;
-    });
-    /* resetDisplay(); */
+    //chaining operations
     if (opSelected.matched && value.firstNum && value.secondNum) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
         resultDisplay.textContent = parseInt(value.result);
+        value.firstNum = value.result;
+        value.secondNum = '';
+        console.log('first num is ' + value.firstNum);
+        console.log('second num is ' + value.secondNum);
     }
+    opSelected.matched = opArray.find( element => {
+        return element == operation.target.id;
+    });
 }
 
 operations.forEach(operation => {
     operation.addEventListener('click', getOp);
 })
 
-/* function resetDisplay() {
-    if (opSelected.matched) {
-        displayVal.value = 0;
-        resultDisplay.textContent = displayVal.value;
-    }
-} */
 
+//if equal gets clicked
 equality.addEventListener('click', performOp);
 
 function performOp() {
