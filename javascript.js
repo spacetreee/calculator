@@ -30,7 +30,6 @@ function operate(operator, a, b) {
 const buttons = document.querySelectorAll('.number');
 const resultDisplay = document.querySelector('.result');
 const operations = document.querySelectorAll('.operator');
-const equality = document.querySelector('#equal');
 const clrBtn = document.querySelector('.clear')
 const value = {
     firstNum: '',
@@ -88,18 +87,6 @@ operations.forEach(operation => {
     operation.addEventListener('click', getOp);
 })
 
-
-//if equal gets clicked
-equality.addEventListener('click', performOp);
-
-function performOp() {
-    if (value.firstNum !== '' && value.secondNum !== '' && opSelected.matched) {
-        value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
-        resultDisplay.textContent = parseFloat((value.result).toFixed(4));
-        value.firstNum = value.result;
-        value.secondNum = '';
-    }
-}
 
 //reset entire calc when clear is pressed
 clrBtn.addEventListener('click', clearAll);
