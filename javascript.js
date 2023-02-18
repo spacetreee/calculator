@@ -70,11 +70,14 @@ buttons.forEach(button => {
 
 function getOp(operation) {
     //chaining operations
-    if (opSelected.matched && value.firstNum !== '' && value.secondNum !== '') {
+    if (opSelected.matched && value.firstNum !== '' && value.secondNum) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
         resultDisplay.textContent = parseFloat((value.result).toFixed(4));
         value.firstNum = value.result;
         value.secondNum = '';
+    } else if (opSelected.matched && value.firstNum !== '' && value.secondNum == 0) {
+        resultDisplay.textContent = 'Try again :)';
+        clearAll;
     }
     opSelected.matched = opArray.find( element => {
         return element == operation.target.id;
