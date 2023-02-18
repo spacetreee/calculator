@@ -69,9 +69,9 @@ buttons.forEach(button => {
 
 function getOp(operation) {
     //chaining operations
-    if (opSelected.matched && value.firstNum && value.secondNum) {
+    if (opSelected.matched && value.firstNum !== '' && value.secondNum !== '') {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
-        resultDisplay.textContent = value.result;
+        resultDisplay.textContent = parseFloat((value.result).toFixed(4));
         value.firstNum = value.result;
         value.secondNum = '';
         console.log('first num is ' + value.firstNum);
@@ -91,9 +91,9 @@ operations.forEach(operation => {
 equality.addEventListener('click', performOp);
 
 function performOp() {
-    console.log(value.firstNum + ' and ' + value.secondNum);
-    if (value.firstNum && value.secondNum && opSelected.matched) {
+    if (value.firstNum !== '' && value.secondNum !== '' && opSelected.matched) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
-        resultDisplay.textContent = value.result;
+        resultDisplay.textContent = parseFloat((value.result).toFixed(4));
     }
+    console.log(value.result);
 }
