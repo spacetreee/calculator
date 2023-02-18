@@ -31,6 +31,7 @@ const buttons = document.querySelectorAll('.number');
 const resultDisplay = document.querySelector('.result');
 const operations = document.querySelectorAll('.operator');
 const equality = document.querySelector('#equal');
+const clrBtn = document.querySelector('.clear')
 const value = {
     firstNum: '',
     secondNum: '',
@@ -74,8 +75,6 @@ function getOp(operation) {
         resultDisplay.textContent = parseFloat((value.result).toFixed(4));
         value.firstNum = value.result;
         value.secondNum = '';
-        console.log('first num is ' + value.firstNum);
-        console.log('second num is ' + value.secondNum);
     }
     opSelected.matched = opArray.find( element => {
         return element == operation.target.id;
@@ -94,6 +93,19 @@ function performOp() {
     if (value.firstNum !== '' && value.secondNum !== '' && opSelected.matched) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
         resultDisplay.textContent = parseFloat((value.result).toFixed(4));
+        value.firstNum = value.result;
+        value.secondNum = '';
     }
-    console.log(value.result);
+}
+
+//reset entire calc when clear is pressed
+clrBtn.addEventListener('click', clearAll);
+
+function clearAll() {
+    Object.keys(value).forEach(valueNum => {
+        value[valueNum] = '';
+    })
+    opSelected.matched = '';
+    displayVal.value = '';
+    resultDisplay.textContent = displayVal.value;
 }
