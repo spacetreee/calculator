@@ -27,7 +27,7 @@ function operate(operator, a, b) {
     }
 }
 
-const buttons = document.querySelectorAll('button');
+const buttons = document.querySelectorAll('.number');
 const resultDisplay = document.querySelector('.result');
 const operations = document.querySelectorAll('.operator');
 const equality = document.querySelector('#equal');
@@ -69,7 +69,7 @@ function getOp(operation) {
     opSelected.matched = opArray.find( element => {
         return element == operation.target.id;
     });
-    resetDisplay();
+    /* resetDisplay(); */
     if (opSelected.matched && value.firstNum && value.secondNum) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
         resultDisplay.textContent = parseInt(value.result);
@@ -80,12 +80,12 @@ operations.forEach(operation => {
     operation.addEventListener('click', getOp);
 })
 
-function resetDisplay() {
+/* function resetDisplay() {
     if (opSelected.matched) {
         displayVal.value = 0;
         resultDisplay.textContent = displayVal.value;
     }
-}
+} */
 
 equality.addEventListener('click', performOp);
 
