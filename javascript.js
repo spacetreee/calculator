@@ -11,7 +11,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return (a*1.0) / b;
 }
 
 function operate(operator, a, b) {
@@ -71,7 +71,7 @@ function getOp(operation) {
     //chaining operations
     if (opSelected.matched && value.firstNum && value.secondNum) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
-        resultDisplay.textContent = parseInt(value.result);
+        resultDisplay.textContent = value.result;
         value.firstNum = value.result;
         value.secondNum = '';
         console.log('first num is ' + value.firstNum);
@@ -94,6 +94,6 @@ function performOp() {
     console.log(value.firstNum + ' and ' + value.secondNum);
     if (value.firstNum && value.secondNum && opSelected.matched) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
-        resultDisplay.textContent = parseInt(value.result);
+        resultDisplay.textContent = value.result;
     }
 }
