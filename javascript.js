@@ -28,7 +28,7 @@ function operate(operator, a, b) {
 }
 
 const buttons = document.querySelectorAll('button');
-const result = document.querySelector('.result');
+const resultDisplay = document.querySelector('.result');
 const operations = document.querySelectorAll('.operator');
 const equality = document.querySelector('#equal');
 const value = {
@@ -51,13 +51,13 @@ function display(button) {
         displayVal['value'] = parseInt(value['firstNum']);  
         value['firstNum'] = parseInt(value['firstNum']);
     
-        result.textContent = parseInt(displayVal.value);
+        resultDisplay.textContent = parseInt(displayVal.value);
     } else if (opSelected.matched != '') {
         value['secondNum'] += button.target.id;
         displayVal['value'] = parseInt(value['secondNum']);  
         value['secondNum'] = parseInt(value['secondNum']);
     
-        result.textContent = parseInt(displayVal.value);
+        resultDisplay.textContent = parseInt(displayVal.value);
     }
 }
 
@@ -70,6 +70,10 @@ function getOp(operation) {
         return element == operation.target.id;
     });
     resetDisplay();
+    if (opSelected.matched && value.firstNum && value.secondNum) {
+        value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
+        resultDisplay.textContent = parseInt(value.result);
+    }
 }
 
 operations.forEach(operation => {
@@ -79,7 +83,7 @@ operations.forEach(operation => {
 function resetDisplay() {
     if (opSelected.matched) {
         displayVal.value = 0;
-        result.textContent = displayVal.value;
+        resultDisplay.textContent = displayVal.value;
     }
 }
 
@@ -89,6 +93,6 @@ function performOp() {
     console.log(value.firstNum + ' and ' + value.secondNum);
     if (value.firstNum && value.secondNum && opSelected.matched) {
         value.result = operate(opSelected.matched, value.firstNum, value.secondNum);
-        result.textContent = parseInt(value.result);
+        resultDisplay.textContent = parseInt(value.result);
     }
 }
